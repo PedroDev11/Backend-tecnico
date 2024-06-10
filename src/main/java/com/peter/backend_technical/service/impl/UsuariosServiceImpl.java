@@ -1,10 +1,14 @@
 package com.peter.backend_technical.service.impl;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
 import com.peter.backend_technical.handler.AppException;
+import com.peter.backend_technical.handler.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +42,8 @@ public class UsuariosServiceImpl implements UsuariosService {
 	private void saveUsers(UsuariosEntity usuarioEntity) {
 		try {
 			usuariosRepository.save(usuarioEntity);
-		} catch(Exception e) {
-			throw new AppException("No puede existir datos repetidos", HttpStatus.BAD_REQUEST);
+		} catch(DataIntegrityViolationException e) {
+			throw new DatabaseException("No pueden existir datos repetidor");
 		}
 	}
 

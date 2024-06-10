@@ -1,5 +1,8 @@
 package com.peter.backend_technical.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class UsuariosDTO {
@@ -8,16 +11,20 @@ public class UsuariosDTO {
 	private String primerApellido;
 	private String segundoApellido;
 	private Integer edad;
-	
+
+    @NotNull
 	@Size(min = 18, max = 18, message = "CURP con formato incorrecto")
 	private String curp;
-	
-	@Size(min = 5, max = 5, message = "Codigo postal con formato incorrecto")
+
+    @Min(value = 9999, message = "Formato incorrecto de CP, deben ser 5 digitos")
+    @Max(value = 99999, message = "Formato incorrecto de CP, deben ser 5 digitos")
 	private Integer cp;
-	
+
+    @NotNull
 	@Size(min = 13, max = 13, message = "RFC con formato incorrecto")
 	private String rfc;
-	
+
+    @NotNull
 	@Size(min = 10, max = 10, message = "Numero telefonico incorrecto, deberia tener al menos 10 digitos")
 	private String telefono;
 	

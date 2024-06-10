@@ -11,6 +11,7 @@
 	<groupId>com.peter</groupId>
 	<artifactId>backend-technical </artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>backend-technical </name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -28,9 +29,10 @@
 			<artifactId>mapstruct-processor</artifactId>
 			<version>1.5.3.Final</version>		
 		</dependency>
+
 		<dependency>
-			<groupId>org.hibernate.validator</groupId>
-			<artifactId>hibernate-validator</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		
 		<dependency>
@@ -55,11 +57,6 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		
 		<dependency>
