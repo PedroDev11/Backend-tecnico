@@ -1,32 +1,28 @@
 package com.peter.backend_technical.dto;
 
+import jakarta.validation.constraints.Size;
+
 public class UsuariosDTO {
 
 	private String nombre;
 	private String primerApellido;
 	private String segundoApellido;
 	private Integer edad;
+	
+	@Size(min = 18, max = 18, message = "CURP con formato incorrecto")
 	private String curp;
+	
+	@Size(min = 5, max = 5, message = "Codigo postal con formato incorrecto")
 	private Integer cp;
+	
+	@Size(min = 13, max = 13, message = "RFC con formato incorrecto")
 	private String rfc;
+	
+	@Size(min = 10, max = 10, message = "Numero telefonico incorrecto, deberia tener al menos 10 digitos")
 	private String telefono;
+	
 	private String fecha;
 	private String password;
-	
-	public UsuariosDTO(String nombre, String primerApellido, String segundoApellido, Integer edad, String curp,
-			Integer cp, String rfc, String telefono, String fecha, String password) {
-		super();
-		this.nombre = nombre;
-		this.primerApellido = primerApellido;
-		this.segundoApellido = segundoApellido;
-		this.edad = edad;
-		this.curp = curp;
-		this.cp = cp;
-		this.rfc = rfc;
-		this.telefono = telefono;
-		this.fecha = fecha;
-		this.password = password;
-	}
 	
 	public String getNombre() {
 		return nombre;

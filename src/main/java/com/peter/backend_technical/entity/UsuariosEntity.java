@@ -27,21 +27,6 @@ public class UsuariosEntity {
 		
 	}
 
-	public UsuariosEntity(String nombre, String primerApellido, String segundoApellido, Integer edad, String curp,
-			Integer cp, String rfc, String telefono, String fecha, String password) {
-		super();
-		this.nombre = nombre;
-		this.primerApellido = primerApellido;
-		this.segundoApellido = segundoApellido;
-		this.edad = edad;
-		this.curp = curp;
-		this.cp = cp;
-		this.rfc = rfc;
-		this.telefono = telefono;
-		this.fecha = fecha;
-		this.password = password;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")

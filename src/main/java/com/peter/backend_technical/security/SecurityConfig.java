@@ -1,20 +1,15 @@
 package com.peter.backend_technical.security;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.config.Customizer;
-
 
 @Configuration
 public class SecurityConfig {
+	
+	@Autowired
+	private JwtAuthFilter jwtAuthFilter;
 
-	@Bean
+	/*@Bean
     public InMemoryUserDetailsManager userDetailsManager() {
         // Creating users
         UserDetails pedro = User.builder()
@@ -37,20 +32,22 @@ public class SecurityConfig {
 
         // Return an instance of this memory user details manager
         return new InMemoryUserDetailsManager(pedro, victor, alex);
-	} 
+	} */
 	
-
-    @Bean
+	/*@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // Setting authorization roles
         http.authorizeHttpRequests(configurer -> 
             configurer
-                .requestMatchers(HttpMethod.GET, "/api/v1/publico/getUsuarios").hasRole("LECTURA")
-                .requestMatchers(HttpMethod.GET, "/api/v1/publico/getUsuarios/**").hasRole("LECTURA")
+                .requestMatchers(HttpMethod.GET, "/api/v1/publico/getUsuarios").hasAnyAuthority("ADMINISTRATOR")
+                .requestMatchers(HttpMethod.GET, "/api/v1/publico/getUsuarios/**").hasAnyAuthority("ADMINISTRATOR")
                 .requestMatchers(HttpMethod.POST, "/api/v1/publico/addUsuario").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/api/v1/publico/updateUsuario/**").hasRole("ESCRITURA")
-                .requestMatchers(HttpMethod.DELETE, "/api/v1/publico/deleteUsuario/**").hasRole("ADMIN")                
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/publico/deleteUsuario/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/v1.0/oauth/client_credential/accessToken/**").permitAll()
         );
+        
+        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         // Use HTTP Basic authentication
         http.httpBasic(Customizer.withDefaults());
@@ -60,5 +57,23 @@ public class SecurityConfig {
 
         // return that given information
         return http.build();
-    }  
+    }*/
 }
+	
+	
+	/* @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http.csrf(AbstractHttpConfigurer::disable)
+                .addFilterBefore(jwtAuthFilter, BasicAuthenticationFilter.class)
+                .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(request ->
+                        request
+                        .requestMatchers(HttpMethod.POST, "/v1.0/oauth/client_credential/accessToken").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/publico/getUsuarios").permitAll()
+                                .anyRequest().authenticated()
+
+                );
+        return http.build();
+    } */
+
